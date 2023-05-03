@@ -6,17 +6,26 @@
                 <title>Watermelon Markets | Form</title>
         </head>
         <body>
-                <h1>Simple Form</h1>
-                <form action="/" method="post">
-                        <h2>What is the name of your store?</h2>
-                        <label for="name">Example: Razer Gold, Amazon, Target. (If you have multiple stores, choose your top gift card -- you can always add more later.)                        </label>
-                        <input type="text" id="name" name="name">
-                        <button type="submit">Next</button>
+                <h1>Watermelon Markets - Seller Survey<h1>
 
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email">
+                <form action="/submit" method="post">
+                        <div class="input-box">
+                                <h2>What is the name of your store?</h2>
+                                <label for="name">Example: Razer Gold, Amazon, Target. (If you have multiple stores, choose your top gift card -- you can always add more later.)</label>
+                                <input type="text" id="name" name="name">
+                                <button type="submit">Next</button>
+                        </div>
+                        
+                        <div class="input-box">
+                                <h2>Balance:</h2>
+                                <label for="bal">What is the balance left on your gift card? If possible, please double check your balance before entering the number here. Example answer: $100, 2,000 INR, 200 EUR.</label>
+                                <input type="number" id="bal" name="bal">
+                                <button type="submit">Back</button>
+                                <button type="submit">Next</button>
+                        </div>
 
-                        <button type="submit">Submit</button>
+
+                      
                 </form>
         </body>
 </html>
