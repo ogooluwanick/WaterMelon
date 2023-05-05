@@ -2,30 +2,157 @@
 <html>
         <head>
                 <meta charset="UTF-8">
-                <link rel="icon" href="/public/icon.png">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <link rel="icon" href="{{ url_for('static', filename='icon.png') }}">
+                <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
                 <title>Watermelon Markets | Form</title>
         </head>
         <body>
-                <h1>Watermelon Markets - Seller Survey<h1>
+                <main>
 
-                <form action="/submit" method="post">
-                        <div class="input-box">
-                                <h2>What is the name of your store?</h2>
-                                <label for="name">Example: Razer Gold, Amazon, Target. (If you have multiple stores, choose your top gift card -- you can always add more later.)</label>
-                                <input type="text" id="name" name="name">
-                                <button type="submit">Next</button>
-                        </div>
+                        <form action="/submit" method="post">
+                                <h1>Watermelon Markets - Seller Survey</h1>
+                                
+                                <section>
+
+                                        <div class="input-box" id="q1" >
+                                                <h2>What is the name of your store?</h2>
+                                                <label for="name">Example: Razer Gold, Amazon, Target. (If you have multiple stores, choose your top gift card -- you can always add more later.)</label>
+                                                <div class="controller">
+                                                        <input type="text" id="name" name="name">
+                                                </div>
+                                                <div class="btnBox">
+                                                        <button type="submit" class="nextBtn">Next</button>
+                                                </div>
+                                        </div>
+                                        
+                                        
+                                        <div class="input-box" id="q2"  style="display:none">
+                                                <h2>What is the balance left on your gift card?</h2>
+                                                <label for="bal">If possible, please double check your balance before entering the number here. Example answer: $100, 2,000 INR, 200 EUR.</label>
+                                                <div class="controller">
+                                                        <input type="number" id="bal" name="bal" step="0.01" required>
+                                                </div>
+                                                <div class="btnBox">
+                                                        <button type="submit" class="backBtn">Back</button>
+                                                        <button type="submit" class="nextBtn">Next</button>
+                                                </div>
+                                        </div>
+                                        
+                                
+                                        <div class="input-box" id="q3"  style="display:none">
+                                                <h2>What price are you selling at?</h2>
+                                                <label for="gift_card_amount">Example Answer: $70. Please remember a low prices generally results in a faster and more successful sale, and we recommend a substantial discount. This number must be strictly at least ten percent less than the face value of the card, as we only sell discounted gift cards.</label>
+                                                <div class="controller">
+                                                        <input type="number" id="gift_card_amount" name="gift_card_amount" required>
+                                                        <select name="price_currency" id="price_currency">
+                                                                {% for name, code in currencies %}
+                                                                <option value="{{ code }}">{{ name  }} - {{code}}</option>
+                                                                {% endfor %}
+                                                        </select>
+                                                </div>
+                                                <div class="btnBox">
+                                                        <button type="submit" class="backBtn">Back</button>
+                                                        <button type="submit" class="nextBtn">Next</button>
+                                                </div>
+                                        </div>
+
+                                        <div class="input-box" id="q4"  style="display:none">
+                                                <h2>Which network would you like to receive funds <at></at>?</h2>
+                                                <label for="crypto_network">If you are unsure, please select Polygon. (You may change this later.)</label>
+                                                <div class="controller">
+                                                        <select name="crypto_network" id="crypto_network">
+                                                                <option value="polygon">Polygon</option>
+                                                                <option value="ethereum">Ethereum</option>
+                                                        </select>
+                                                </div>
+
+                                                <div class="btnBox">
+                                                        <button type="submit" class="backBtn">Back</button>
+                                                        <button type="submit" class="nextBtn">Next</button>
+                                                </div>
+                                        </div>
+
+                                        <div class="input-box" id="q5"  style="display:none">
+                                                <h2>What Polygon or Ethereum address would you like to receive funds at?</h2>
+                                                <label for="wallet_address">You may change this later. Example: 0xfA63Ca5caF1D88f42e1A73aE0E0cb7060B9E7292</label>
+                                                <div class="controller">
+                                                        <input type="text" id="wallet_address" name="wallet_address">
+                                                </div>
+                                                <div class="btnBox">
+                                                        <button type="submit" class="backBtn">Back</button>
+                                                        <button type="submit" class="nextBtn">Next</button>
+                                                </div>
+                                        </div>
+
+                                        <div class="input-box" id="q6"  style="display:none">
+                                                <h2>What&apos;s your email address?</h2>
+                                                <label for="email">We will only use this to reach out about the transaction. Please check this often as we'll use this as the main way of getting in touch.</label>
+                                                <div class="controller">
+                                                        <input type="email" id="email" name="email">
+                                                </div>
+                                                <div class="btnBox">
+                                                        <button type="submit" class="backBtn">Back</button>
+                                                        <button type="submit" class="nextBtn">Next</button>
+                                                </div>
+                                        </div>
+                                </section>
+                                
                         
-                        <div class="input-box">
-                                <h2>Balance:</h2>
-                                <label for="bal">What is the balance left on your gift card? If possible, please double check your balance before entering the number here. Example answer: $100, 2,000 INR, 200 EUR.</label>
-                                <input type="number" id="bal" name="bal">
-                                <button type="submit">Back</button>
-                                <button type="submit">Next</button>
-                        </div>
-
-
-                      
-                </form>
+                        </form>
+                </main>
+                
         </body>
+
+        <script>
+                console.log("currentContainer")
+                // Get all Next and Back buttons
+                const nextBtns = document.querySelectorAll('.nextBtn');
+                const backBtns = document.querySelectorAll('.backBtn');
+
+
+                nextBtns.forEach(function(btn) {
+                        btn.addEventListener('click', function(event) {
+                                // Prevent the form from submitting
+                                event.preventDefault();
+
+                                // Get the current question container
+                                const currentContainer = event.target.closest('.input-box');
+
+                                // Hide the current question
+                                currentContainer.style.display = 'none';
+
+                                // Show the next question
+                                const nextContainer = currentContainer.nextElementSibling;
+                                if (nextContainer) {
+                                        nextContainer.style.display = 'block';
+                                }
+                                else {
+                                        // No more questions, submit the form
+                                        const form = document.querySelector('form');
+                                        form.submit();
+                                }
+                        });
+                });
+
+                backBtns.forEach(function(btn) {
+                        btn.addEventListener('click', function(event) {
+                                // Prevent the form from submitting
+                                event.preventDefault();
+
+                                // Get the current question container
+                                const currentContainer = event.target.closest('.input-box');
+
+                                // Hide the current question
+                                currentContainer.style.display = 'none';
+
+                                // Show the previous question
+                                const prevContainer = currentContainer.previousElementSibling;
+                                if (prevContainer) {
+                                        prevContainer.style.display = 'block';
+                                }
+                        });
+                })
+        </script>
 </html>
