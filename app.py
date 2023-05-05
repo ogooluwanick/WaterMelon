@@ -1,6 +1,8 @@
 from flask import Flask,request, render_template, session
+from builtins import enumerate  
 import pycountry
 import uuid
+
 
 
 app = Flask(__name__)
@@ -54,7 +56,7 @@ def update_db():
 
 @app.route('/results')
 def results():
-    return render_template('results.html',databank=databank)
+    return render_template('results.html',databank=databank, enumerate=enumerate)
 
 
 if __name__ == '__main__':

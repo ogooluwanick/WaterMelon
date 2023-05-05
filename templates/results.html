@@ -27,18 +27,21 @@
                                                 <th>wallet_address</th>
                                                 <th>email_address</th>
                                         </tr>
-                                
-                                <tr>
-                                                <td>1</td>
-                                                <td>bf7e78017947454292645cedcf68f6d7</td>
-                                                <td>Amazon</td>
-                                                <td>None</td>
-                                                <td>None</td>
-                                                <td>USD</td>
-                                                <td>None</td>
-                                                <td>USD</td>
-                                                <td>None</td>
+
+                                        {% for index, survey in enumerate(databank) %}
+                                        <tr>
+                                                <td>{{ index + 1 }}</td>
+                                                <td>{{ survey.get('survey_id', 'None') }}</td>
+                                                <td>{{ survey.get('name', 'None') }}</td>
+                                                <td>{{ survey.get('bal', '0') }}</td>
+                                                <td>{{ survey.get('gift_card_amount', '0') }}</td>
+                                                <td>{{ survey.get('price_currency', 'None') }}</td>
+                                                <td>{{ survey.get('crypto_network', 'None') }}</td>
+                                                <td>{{ survey.get('wallet_address', 'None') }}</td>
+                                                <td>{{ survey.get('email', 'None') }}</td>
                                         </tr>
+                                        {% endfor %}
+
                                 </tbody>
                         </table>
 
